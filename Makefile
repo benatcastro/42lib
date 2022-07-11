@@ -6,65 +6,65 @@ PRINTF 		= ft_printf
 NAME 		= libft
 #---------GCC and FLAGS----------
 
-CC 	 	= gcc
+CC 	 		= gcc
+AR			= ar rc
 CFLAGS 		= -Wall -Wextra -Werror
 SANITIZE 	= -fsanitize=address -g3
 VALGRIND 	= valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
 
 #---------DIRECTORIES-----------
-
-SRC_DIR = srcs/$(NAME)/
+SRC_DIR = srcs/
 OBJ_DIR = objs/
 INC_DIR = includes/
 LIB_DIR = libraries/
 
 #---------FILES----------------
-FILES_libft = 	ft_isalpha.c			\
-	  	ft_isdigit.c			\
-	 	ft_isalnum.c			\
-	 	ft_isascii.c			\
-	  	ft_isprint.c			\
-	  	ft_strlen.c			\
-	  	ft_strlcpy.c			\
-	  	ft_strlcat.c			\
-		ft_strncmp.c			\
-		ft_toupper.c			\
-	  	ft_tolower.c			\
-	  	ft_strnstr.c			\
-	  	ft_atoi.c			\
-	  	ft_strchr.c			\
-	  	ft_strrchr.c			\
-	  	ft_memset.c			\
-	  	ft_bzero.c			\
-	  	ft_memchr.c			\
-	  	ft_memcmp.c			\
-	  	ft_memcpy.c			\
-	  	ft_memmove.c			\
-		ft_calloc.c			\
-	  	ft_strdup.c			\
-	 	ft_substr.c			\
-	  	ft_strjoin.c			\
-	  	ft_strtrim.c			\
-	  	ft_split.c			\
-	  	ft_itoa.c			\
-	  	ft_strmapi.c			\
-	  	ft_striteri.c 			\
-	  	ft_putchar_fd.c 		\
-	  	ft_putstr_fd.c 			\
-	  	ft_putendl_fd.c			\
-	  	ft_putnbr_fd.c			\
-		ft_lstadd_front_bonus.c 	\
-		ft_lstlast_bonus.c      	\
-		ft_lstnew_bonus.c  		\
-		ft_lstsize_bonus.c		\
-		ft_lstadd_back_bonus.c 		\
-		ft_lstdelone_bonus.c		\
-		ft_lstclear_bonus.c		\
-		ft_lstiter_bonus.c		\
-		ft_lstmap_bonus.c
+FILES_LIBFT = 	ft_isalpha			\
+	  	ft_isdigit			\
+	 	ft_isalnum			\
+	 	ft_isascii			\
+	  	ft_isprint			\
+	  	ft_strlen			\
+	  	ft_strlcpy			\
+	  	ft_strlcat			\
+		ft_strncmp			\
+		ft_toupper			\
+	  	ft_tolower			\
+	  	ft_strnstr			\
+	  	ft_atoi			\
+	  	ft_strchr			\
+	  	ft_strrchr			\
+	  	ft_memset			\
+	  	ft_bzero			\
+	  	ft_memchr			\
+	  	ft_memcmp			\
+	  	ft_memcpy			\
+	  	ft_memmove			\
+		ft_calloc			\
+	  	ft_strdup			\
+	 	ft_substr			\
+	  	ft_strjoin			\
+	  	ft_strtrim			\
+	  	ft_split			\
+	  	ft_itoa			\
+	  	ft_strmapi			\
+	  	ft_striteri 			\
+	  	ft_putchar_fd 		\
+	  	ft_putstr_fd 			\
+	  	ft_putendl_fd			\
+	  	ft_putnbr_fd			\
+		ft_lstadd_front_bonus 	\
+		ft_lstlast_bonus      	\
+		ft_lstnew_bonus  		\
+		ft_lstsize_bonus		\
+		ft_lstadd_back_bonus 	\
+		ft_lstdelone_bonus		\
+		ft_lstclear_bonus		\
+		ft_lstiter_bonus		\
+		ft_lstmap_bonus
 
-FILES_ft_printf =  ft_printf			\
-		ft_printf_utils 		\
+FILES_FT_PRINTF =  ft_printf			\
+	  	ft_printf_utils 		\
 		ft_printf_utils2 		\
 		ft_is_arg			\
 		ft_print_args ft_getflags	\
@@ -75,32 +75,32 @@ FILES_ft_printf =  ft_printf			\
 		ft_first_arg 			\
 		ft_check_arg			\
 
-FILES_gnl = get_next_line_bonus			\
-	    get_next_line_utils_bonus		\
+FILES_GNL = 	get_next_line_bonus		\
+		get_next_line_utils_bonus	\
 
 
 #---------------PREFIX and SUFFIX-----------------
 
-
-all: libft 
-
-#$(LIB_NAME): 
+SRC_LIBFT = $(addprefix $(SRC_DIR)libft/, $(addsuffix .c, $(FILES_LIBFT)))
+OBJ_LIBFT = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES_LIBFT)))
 
 #OBJF = .cache_exists
 
+all: libft
 
-libft: $(OBJF) $(OBJ)
+	$(AR) $(NAME) $(OBJ_DIR)%.o
 
-SRC_FILES = 	FILES_$(NAME)
-SRC	  = 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-OBJ  	  = 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+mk_dirs:
+	@mkdir -p $(LIB_DIR)
+	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@echo "compiling"
+libft: mk_dirs $(OBJ_LIBFT)
+	@echo "hello"
+
+$(OBJ_LIBFT)%.o: $(SRC_LIBFT)
+	@echo "compiling $@"
 	@$(CC) $(CC_FLAGS) -I $(INC_DIR) -c $< -o $@
 
-
-
-$(OBJF):
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(LIBRARIES_DIR)
+clean:
+	rm -rf $(OBJ_DIR)
+	rm -rf $(LIB_DIR)
