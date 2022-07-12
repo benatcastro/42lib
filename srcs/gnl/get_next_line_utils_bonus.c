@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: becastro <becastro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bena <bena@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 07:26:41 by bena              #+#    #+#             */
-/*   Updated: 2022/06/01 20:45:33 by becastro         ###   ########.fr       */
+/*   Updated: 2022/07/12 23:53:09 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-// size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-// {
-// 	size_t	counter;
-
-// 	counter = 0;
-// 	if (dstsize > 0)
-// 	{
-// 		while (src[counter] && counter < dstsize - 1)
-// 		{
-// 			dst[counter] = src[counter];
-// 			counter++;
-// 		}
-// 		dst[counter] = '\0';
-// 	}
-// 	return (ft_strlen(src));
-// }
+#include "get_next_line_bonus.h"
 
 char	*ft_strjoin(char *str1, char *str2)
 {

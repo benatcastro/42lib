@@ -6,7 +6,7 @@
 /*   By: becastro <becastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 10:57:36 by becastro          #+#    #+#             */
-/*   Updated: 2022/05/18 13:36:07 by becastro         ###   ########.fr       */
+/*   Updated: 2022/05/21 11:43:54 by becastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,25 @@
 
 int	ft_printf(const char *s, ...)
 {
-	size_t	i;
 	t_args	*lstargs;
-	char	*arg;
 	char	*str;
 	int		aux;
 
 	str = (char *)s;
 	lstargs = ft_calloc(1, sizeof(t_args));
 	va_start(lstargs->variatic_arg, s);
+	ft_iterate(str, lstargs);
+	va_end(lstargs->variatic_arg);
+	aux = lstargs->args_size;
+	free(lstargs);
+	return (aux);
+}
+
+void	ft_iterate(char *str, t_args *lstargs)
+{
+	size_t	i;
+	char	*arg;
+
 	i = -1;
 	while (str[++i] != '\0')
 	{
@@ -31,7 +41,10 @@ int	ft_printf(const char *s, ...)
 			arg = ft_trim_arg(&str[i + 1]);
 			lstargs->arg = ft_strdup(arg);
 			if (ft_validate_arg(arg) == 0)
-				break ;
+			{
+				ft_putchar('%', lstargs);
+				continue ;
+			}
 			free (arg);
 			ft_getflags(lstargs);
 			ft_print_argument(lstargs);
@@ -40,8 +53,27 @@ int	ft_printf(const char *s, ...)
 		else
 			ft_putchar(str[i], lstargs);
 	}
-	va_end(lstargs->variatic_arg);
-	aux = lstargs->args_size;
-	free(lstargs);
-	return (aux);
+}
+
+int	ft_print_argument(t_args *lstargs)
+{
+	ft_call(ft_getfnc(lstargs), lstargs);
+	ft_print_prefix(lstargs);
+	if (lstargs->first_params.nbr)
+		ft_width_print(lstargs);
+	else
+		ft_final_print(lstargs);
+	ft_reset_list(lstargs);
+	return (0);
+}
+
+int	ft_validate_arg(const char *s)
+{
+	while (*s)
+	{
+		if (!is_in_types(*s) || !is_in_prefix(*s) || !is_in_precision(*s))
+			return (1);
+		s++;
+	}
+	return (0);
 }

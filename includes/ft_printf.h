@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: becastro <becastro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bena <bena@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:48:19 by becastro          #+#    #+#             */
-/*   Updated: 2022/05/18 11:46:26 by becastro         ###   ########.fr       */
+/*   Updated: 2022/07/12 23:59:10 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdio.h>
 # include <stdarg.h>
 # include <unistd.h>
-# include "../libft/libft.h"
+# include "libft.h"
 # define LONG_MAX 9223372036854775807LL
 # define LONG_MIN -9223372036854775808
 # define ULONG_MAX 18446744073709551615ULL
@@ -58,6 +58,7 @@ typedef struct t_nbr_data
 int		ft_validate_arg(const char *s);
 //field width
 void	ft_get_field_width(t_args *lstargs);
+void	ft_width_print(t_args *lstargs);
 //prints
 void	c(t_args *lstargs);
 void	s(t_args *lstargs);
@@ -101,4 +102,5 @@ int		ft_printf(const char *str, ...);
 int		ft_to_positive(int nbr);
 void	ft_final_print(t_args *lstargs);
 int		get_i_int(t_args *lstargs, int i, int arg_len, int p_size);
-#endif //
+void	ft_iterate(char *str, t_args *lstargs);
+#endif

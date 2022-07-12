@@ -3,7 +3,6 @@ LIB_NAME 	= 42lib.a
 LIBFT 		= libft
 GNL 		= gnl
 PRINTF 		= ft_printf
-NAME 		= libft
 #---------GCC and FLAGS----------
 
 CC 	 		= gcc
@@ -60,7 +59,7 @@ FILES_LIBFT = 	ft_isalpha			\
 		ft_lstadd_back_bonus 	\
 		ft_lstdelone_bonus		\
 		ft_lstclear_bonus		\
-		ft_lstiter_bonus		\
+	ft_lstiter_bonus		\
 		ft_lstmap_bonus
 
 FILES_FT_PRINTF =  ft_printf			\
@@ -86,21 +85,38 @@ OBJ_LIBFT = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES_LIBFT)))
 
 #OBJF = .cache_exists
 
-all: libft
-
-	$(AR) $(NAME) $(OBJ_DIR)%.o
+all: libft printf gnl
+	$(AR) $(LIB_DIR)$(LIB_NAME) $(OBJ_DIR)*
+	ranlib $(LIB_DIR)$(LIB_NAME)
+	@echo "42 Lib Compiled"
 
 mk_dirs:
 	@mkdir -p $(LIB_DIR)
 	@mkdir -p $(OBJ_DIR)
 
-libft: mk_dirs $(OBJ_LIBFT)
-	@echo "hello"
+libft: mk_dirs
+	@make -C srcs/libft
+	@clear
+	@echo "Libft Compiled"
 
-$(OBJ_LIBFT)%.o: $(SRC_LIBFT)
-	@echo "compiling $@"
-	@$(CC) $(CC_FLAGS) -I $(INC_DIR) -c $< -o $@
+printf: mk_dirs libft
+	@make -C srcs/ft_printf
+	@clear
+	@echo "Printf Compiled"
+
+gnl: mk_dirs
+	@make -C srcs/gnl
+	@clear
+	@echo "GNL Compiled"
+
 
 clean:
-	rm -rf $(OBJ_DIR)
-	rm -rf $(LIB_DIR)
+	@make clean -C srcs/libft
+	@make clean -C srcs/ft_printf
+	@make clean -C srcs/gnl
+	@clear
+
+fclean: clean
+	@rm -rf $(OBJ_DIR)
+	@rm -rf $(LIB_DIR)
+re: clean all

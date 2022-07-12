@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_first_arg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: becastro <becastro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bena <bena@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 12:37:08 by becastro          #+#    #+#             */
-/*   Updated: 2022/05/18 13:57:06 by becastro         ###   ########.fr       */
+/*   Updated: 2022/07/12 23:59:30 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	ft_get_first_param(t_args *lstargs)
 	{
 		full_arg = ft_trim_minus(full_arg, lstargs);
 	}
-	//printf("full arg (%s)\n", full_arg);
 	while ((!is_in_precision(full_arg[i]) && full_arg[i] != '.')
 		|| ft_isdigit(full_arg[i]))
 		i++;
@@ -48,14 +47,10 @@ static void	ft_get_first_param(t_args *lstargs)
 	free(full_arg);
 }
 
-//static	ft_print_pre
-
 void	ft_get_field_width(t_args *lstargs)
 {
-	int	i;
 	int	j;
 
-	i = 0;
 	j = -1;
 	while (lstargs->arg[++j])
 	{

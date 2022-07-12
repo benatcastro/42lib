@@ -6,22 +6,11 @@
 /*   By: becastro <becastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:04:59 by bena              #+#    #+#             */
-/*   Updated: 2022/05/18 14:05:34 by becastro         ###   ########.fr       */
+/*   Updated: 2022/05/21 11:22:15 by becastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-void	test(t_args *lstargs)
-{
-	printf("\nType: (%c)\nPrefix (%c)\nPre_Type(%c)\nPre_size (%d)\nValid (%d)\n",
-		lstargs->type,
-		lstargs->prefix,
-		lstargs->precision_type,
-		lstargs->precision_size,
-		lstargs->valid_arg);
-	ft_reset_list(lstargs);
-}
 
 static	int	get_int_null(t_args *lstargs, int arg_len, int i)
 {
@@ -83,6 +72,7 @@ int	get_i_int(t_args *lstargs, int i, int arg_len, int p_size)
 static int	get_i_double(t_args *lstargs, int i)
 {
 	int	arg_len;
+
 	arg_len = ft_strlen(lstargs->printable_arg);
 	if (lstargs->first_params.nbr > arg_len
 		&& lstargs->precision_size < arg_len)
@@ -131,12 +121,12 @@ static int	ft_get_i(t_args *lstargs)
 void	ft_width_print(t_args *lstargs)
 {
 	int	i;
+
 	if ((lstargs->first_params.check == 1 && !lstargs->precision_type))
 	{
 		i = lstargs->first_params.nbr - ft_strlen(lstargs->printable_arg);
 		if (lstargs->type == 's' && lstargs->first_params.sign != '-')
 			i++;
-		//printf("TEST (%zu) (%d) \n", ft_strlen(lstargs->printable_arg), lstargs->first_params.nbr);
 	}
 	else
 		i = ft_get_i(lstargs);
@@ -153,23 +143,3 @@ void	ft_width_print(t_args *lstargs)
 			ft_putchar(' ', lstargs);
 	}
 }
-
-int	ft_print_argument(t_args *lstargs)
-{
-
-	//ft_call(test, lstargs);
-	ft_call(ft_getfnc(lstargs), lstargs);
-	//printf("TEST\n");
-	ft_print_prefix(lstargs);
-
-	//printf ("nbr %d\n",lstargs->first_params.nbr);
-	// 	printf("test");
-	if (lstargs->first_params.nbr)
-		ft_width_print(lstargs);
-	else
-		ft_final_print(lstargs);
-
-	ft_reset_list(lstargs);
-	return (0);
-}
-

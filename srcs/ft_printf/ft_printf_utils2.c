@@ -6,7 +6,7 @@
 /*   By: becastro <becastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 22:47:59 by bena              #+#    #+#             */
-/*   Updated: 2022/05/18 13:15:40 by becastro         ###   ########.fr       */
+/*   Updated: 2022/05/21 11:42:53 by becastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	ft_reset_list(t_args *lstargs)
 
 void	ft_final_print(t_args *lstargs)
 {
-	//printf("final print executed\n");
 	if (lstargs->precision_type == '-')
 	{
 		ft_putstr(lstargs->printable_arg, lstargs);

@@ -6,7 +6,7 @@
 /*   By: becastro <becastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 16:14:52 by becastro          #+#    #+#             */
-/*   Updated: 2022/05/16 14:29:06 by becastro         ###   ########.fr       */
+/*   Updated: 2022/05/21 11:32:50 by becastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	ft_call(void (*f)(t_args*), t_args *lstargs)
 char	*ft_trim_arg(char *str)
 {
 	size_t	i;
+
 	i = 0;
 	while (str[i] && is_in_types(str[i]))
 		i++;

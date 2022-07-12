@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: becastro <becastro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bena <bena@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 20:46:27 by becastro          #+#    #+#             */
-/*   Updated: 2022/06/01 20:46:30 by becastro         ###   ########.fr       */
+/*   Updated: 2022/07/12 23:54:22 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static	t_fd	*ft_create_node(int fd, t_fd **head)
 {
 	t_fd	*node;
 
-	//printf("NODE BEING CREATED (%d)\n", fd);
 	node = malloc(sizeof(t_fd));
 	node->fd = fd;
 	node->str = NULL;
@@ -47,28 +46,17 @@ static	t_fd	*ft_get_node(int fd, t_fd **node)
 {
 	t_fd	*tmp;
 
-		//printf("FD: (%d)\n", fd);
 	if (!(*node))
-	{
-		//printf("PRIMER NODO\n");
 		(*node) = ft_create_node(fd, node);
-	}
 	tmp = (*node);
 	while ((tmp))
 	{
-		// printf("ACTUAL NODE FD (%d) (%d)\n", (tmp)->fd, fd);
 		if ((tmp)->fd == fd)
-		{
-			//printf("LOOP\n");
 			return (tmp);
-		}
 		(tmp) = (tmp)->next;
 	}
 	if (!(tmp))
-	{
-		//printf("NO HAY COINCIDENCIAS\n");
 		(tmp) = ft_create_node(fd, node);
-	}
 	return ((tmp));
 }
 
@@ -123,33 +111,3 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return ((aux)->str);
 }
-
-// int	main(void)
-// {
-// 	int		fd;
-// 	int		fd2;
-// 	int		fd3;
-// 	char	*str;
-
-// 	fd = open("tests/alternate_line_nl_no_nl", O_RDONLY);
-// 	fd2 = open("tests/multiple_line_with_nl", O_RDONLY);
-// 	fd3 = open("tests/43_with_nl", O_RDONLY);
-// 	printf("FD1: (%d)\n", fd);
-// 	printf("FD2: (%d)\n", fd2);
-// 	printf("FD3: (%d)\n", fd3);
-// 	for (size_t i = 0; i < 10; i++)
-// 	{
-// 		str = get_next_line(fd);
-// 		printf ("Return : |%s|\n", str);
-// 		free(str);
-// 		str = get_next_line(fd2);
-// 		printf ("Return : |%s|\n", str);
-// 		free(str);
-// 		str = get_next_line(fd3);
-// 		printf ("Return : |%s|\n", str);
-// 		free(str);
-// 	}
-// 	close(fd);
-// 	close(fd2);
-// 	close(fd3);
-// }
